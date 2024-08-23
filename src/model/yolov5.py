@@ -20,7 +20,6 @@ lines_array = [20, 20, 30, 720]  # example
 count = 0
 draw.line((20, 20, 30, 720), fill="pink", width=5)  # example
 
-
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
@@ -74,7 +73,7 @@ while cap.isOpened():
             2,
         )
 
-    cv2.imshow("Object Tracking", frame)
+    # cv2.imshow("Object Tracking", frame)
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 trail_img.show()
