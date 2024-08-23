@@ -30,6 +30,7 @@ const socket = io(backendUrl, {
   extraHeaders: { "ngrok-skip-browser-warning": "69420" },
 });
 
+socket.connect();
 export const sendLines = createAsyncThunk<
   unknown,
   undefined,
