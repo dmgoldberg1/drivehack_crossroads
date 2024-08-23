@@ -1,12 +1,12 @@
 ## Front End
 
-Создано с нуля на React Type Scipt с использованием технологии менеджера состояния приложения [React](https://react.dev/)
+Создано с нуля на [React](https://react.dev/) Type Scipt с использованием технологии менеджера состояния приложения [Redux-Toolkit](https://redux-toolkit.js.org/)
 
 ### Демо
 
 Посмотреть работу вы можете здесь: [*Клик*](github.com)
 
-### Как с компилить
+### Как скомпилить
 
 ```
 npm run prettier-format
