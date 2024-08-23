@@ -84,7 +84,7 @@ def lines_handler(raw_lines):
     lines = json.loads(raw_lines)
     video_id = lines["video_id"]
 
-    tracker_model.process_video(video_path=video_table[video_id], lines=lines)
+    tracker_model.process_video(video_path=video_table[video_id], input_dict=lines)
     socketio.emit("lol", "popa")
 
 
