@@ -13,7 +13,7 @@ class ObjectTracker:
     def __init__(self):
         self.model = YOLO("yolov8s.pt")
         # Инициализация DeepSort
-        self.deepsort = DeepSort(max_age=5)
+        self.deepsort = DeepSort(max_age=10)
         self.memory = dict()
         self.lines_count_dict = dict()
 
@@ -25,7 +25,7 @@ class ObjectTracker:
             ret, frame = cap.read()
             if not ret:
                 break
-            results = self.model.predict(frame)
+            results = self.model.predict(frame, classes=[2, 3, 5, 7])
             bboxes = results[0].boxes.xyxy.cpu().numpy()
             confidences = results[0].boxes.conf.cpu().numpy()
             classes = results[0].boxes.cls.cpu().numpy()
