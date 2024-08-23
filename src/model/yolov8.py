@@ -57,10 +57,10 @@ class ObjectTracker:
                         k = (y_new - y_old) / (x_new - x_old)
                         b = y_old - k * x_old
                         for i in range(len(input_dict["lines"])):
-                            lines_array = input_dict["lines"][i]["coord"]
+                            lines_array = input_dict["lines"][i]["points"]
                             line_name = input_dict["lines"][i]["id"]
                             if check_intersection(
-                                k, b, x_new, y_new, x_old, y_old, lines_array
+                                    k, b, x_new, y_new, x_old, y_old, lines_array
                             ):
                                 if line_name not in self.lines_count_dict.keys():
                                     self.lines_count_dict[line_name] = 1
@@ -90,7 +90,7 @@ class ObjectTracker:
 
 tracker = ObjectTracker()
 example_dict = {
-    "lines": [{"id": "popaname", "coord": [20, 20, 30, 720], "direction": 1}]
+    "lines": [{"id": "popaname", "points": [20, 20, 30, 720], "direction": 1}]
 }
 if __name__ == "__main__":
     print(tracker.process_video("test.mp4", example_dict))
