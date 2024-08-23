@@ -13,7 +13,7 @@ from flask_cors import CORS
 from flask_socketio import SocketIO
 from gevent import monkey
 
-monkey.patch_all()
+monkey.patch_all(ssl=False)
 
 module_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(module_dir))
@@ -89,6 +89,8 @@ def prep_video(video_id, lines):
         video_path=video_table[video_id], input_dict=lines
     )
     logger.info("Video processing completed")
+    socketio.emit("lines_result", result)
+    return None
 
 
 th = None
@@ -102,9 +104,6 @@ def lines_handler(raw_lines):
     th = Thread(target=prep_video, args=(video_id, lines))
     th.daemon = True
     th.start()
-    while th.is_alive():
-        socketio.sleep(1)
-    socketio.emit("lines_result", th.join())
 
 
 @socketio.on("connect")
