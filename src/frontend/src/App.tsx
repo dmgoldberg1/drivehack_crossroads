@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { ProgressPanel } from "./components/progress-panel/ProgressPanel";
 import { TopPanel } from "./components/TopPanel";
-import { Route, Routes, redirect } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { LineDrawerCanvas } from "./components/pages/line-drawer/LineDrawerCanvas";
 import { FileUploader } from "./components/pages/file-uploader/FileUploader";
 import { startWebsocket } from "./redux/api";
 import { useAppDispatch } from "./redux/rootStore";
 import { ResultPage } from "./components/pages/show-result/ResultPage";
-import { ResultChart } from "./components/pages/show-result/ResultChart";
 //TODO:beautify imports, make components/index
 
 export const App = () => {
