@@ -4,7 +4,7 @@ import { TopPanel } from "./components/TopPanel";
 import { Route, Routes, redirect } from "react-router-dom";
 import { LineDrawerCanvas } from "./components/pages/line-drawer/LineDrawerCanvas";
 import { FileUploader } from "./components/pages/file-uploader/FileUploader";
-import { startListening } from "./redux/api";
+import { startWebsocket } from "./redux/api";
 import { useAppDispatch } from "./redux/rootStore";
 import { ResultPage } from "./components/pages/show-result/ResultPage";
 //TODO:beautify imports, make components/index
@@ -13,8 +13,9 @@ export const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(startListening());
+    dispatch(startWebsocket());
   }, []);
+
   return (
     <>
       <TopPanel height="55px" />

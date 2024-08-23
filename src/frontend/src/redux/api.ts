@@ -48,7 +48,7 @@ export const sendLines = createAsyncThunk<
   }
 });
 
-export const startListening = () => (dispatch) => {
+export const startWebsocket = () => (dispatch) => {
   if (socket.connected) {
     return;
   }
