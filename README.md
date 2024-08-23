@@ -19,3 +19,13 @@ npm run build
 Для локального запуска и тестирования используется расширение [Live-Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) для VSCode
 
 ## Backend
+Windows
+```python
+git clone https://github.com/dmgoldberg1/drivehack_crossroads
+cd drivehack_crossroads
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements/web-requirements.txt -r requirements/ml-requirements.txt
+cd src\backend
+python main.py
+```
