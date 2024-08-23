@@ -7,6 +7,7 @@ import { FileUploader } from "./components/pages/file-uploader/FileUploader";
 import { startWebsocket } from "./redux/api";
 import { useAppDispatch } from "./redux/rootStore";
 import { ResultPage } from "./components/pages/show-result/ResultPage";
+import { ResultChart } from "./components/pages/show-result/ResultChart";
 //TODO:beautify imports, make components/index
 
 export const App = () => {

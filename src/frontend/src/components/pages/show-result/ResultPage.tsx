@@ -1,6 +1,7 @@
 import React from "react";
 import { selectVideoState } from "../../../redux";
 import { FallbackLoader } from "../../FallbackLoader";
+import { ResultChart } from "./ResultChart";
 
 export const ResultPage = () => {
   const { result } = selectVideoState();
@@ -9,5 +10,5 @@ export const ResultPage = () => {
     return <FallbackLoader />;
   }
 
-  return <div></div>;
+  return <ResultChart inputData={result} />;
 };

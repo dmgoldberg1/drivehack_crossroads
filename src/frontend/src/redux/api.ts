@@ -25,31 +25,28 @@ export const postVideo = createAsyncThunk<
 
 const socket = io(backendUrl, {
   protocols: "socket.io",
-  transports: ["websockets", "pooling"],
   autoConnect: false,
+  transports: ["polling"],
   extraHeaders: { "ngrok-skip-browser-warning": "69420" },
 });
 
 export const sendLines = createAsyncThunk<
-  unknown,
-  undefined,
+  any,
+  DataTypes.Line[],
   { state: RootState }
 >("send-lines", async (requestData, thunkApi) => {
   const id = thunkApi.getState().videoData.image!.video_id;
   if (id && socket.connected) {
-    socket.emit(
-      "lines",
-      JSON.stringify({
-        lines: thunkApi.getState().lines.value,
-        video_id: id,
-      } as DataTypes.LineRequest)
-    );
+    const data = {
+      lines: requestData,
+      video_id: id,
+    } as DataTypes.LineRequest;
+    socket.emit("lines", JSON.stringify(data));
     thunkApi.dispatch(setSteperState(2));
   }
 });
 
 export const startWebsocket = () => (dispatch) => {
-  console.log("A");
   if (socket.connected) {
     return;
   }
@@ -64,6 +61,7 @@ export const startWebsocket = () => (dispatch) => {
 };
 
 window.addEventListener("beforeunload", () => {
+  console.log("socket disconnect");
   socket.off("lines-result");
   socket.off("connect");
   socket.disconnect();

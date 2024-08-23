@@ -13,7 +13,6 @@ import { useAppDispatch, addLine } from "../../../redux";
 
 export const PopoverForm = ({ isOpen, onClose }) => {
   const dispatch = useAppDispatch();
-  const firstFieldRef = useRef(null);
 
   const addNewLine = (data: DataTypes.Line) => {
     dispatch(addLine(data));

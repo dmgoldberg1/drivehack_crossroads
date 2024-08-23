@@ -33,7 +33,23 @@ export const LineDrawerCanvas = () => {
 
   const onSubmit = () => {
     if (lines.length > 0) {
-      dispatch(sendLines());
+      dispatch(
+        sendLines(
+          lines.map((x) => {
+            const scaleX = image.width / canvasSize.w;
+            const scaleY = image.height / canvasSize.h;
+            return {
+              id: x.id,
+              points: [
+                x.points[0] * scaleX,
+                x.points[1] * scaleY,
+                x.points[2] * scaleX,
+                x.points[3] * scaleY,
+              ],
+            };
+          })
+        )
+      ); //TODO: convert to image scales
     }
   };
 
