@@ -1,6 +1,6 @@
 ## Front End
 
-Создано с нуля на [React](https://react.dev/) Type Scipt с использованием технологии менеджера состояния приложения [Redux-Toolkit](https://redux-toolkit.js.org/)
+Создано с нуля на [React](https://react.dev/) Type Scipt с использованием технологии менеджера состояния приложения [Redux-Toolkit](https://redux-toolkit.js.org/) и `WebSocket`
 
 ### Демо
 

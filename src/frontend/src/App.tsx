@@ -6,6 +6,7 @@ import { LineDrawerCanvas } from "./components/pages/line-drawer/LineDrawerCanva
 import { FileUploader } from "./components/pages/file-uploader/FileUploader";
 import { startListening } from "./redux/api";
 import { useAppDispatch } from "./redux/rootStore";
+import { ResultPage } from "./components/pages/show-result/ResultPage";
 //TODO:beautify imports, make components/index
 
 export const App = () => {
@@ -21,7 +22,7 @@ export const App = () => {
       <Routes>
         <Route index path="/docs" element={<FileUploader />} />
         <Route path="/edit" element={<LineDrawerCanvas />} />
-        <Route path="/result" element={<section>Other</section>} />
+        <Route path="/result" element={<ResultPage/>} />
       </Routes>
     </>
   );

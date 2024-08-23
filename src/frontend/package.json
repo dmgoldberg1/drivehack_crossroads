@@ -1,5 +1,5 @@
 {
-  "name": "my-react-app",
+  "name": "drivehack-frontend",
   "version": "1.0.0",
   "description": "My React application",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "build": "esbuild src/index.tsx --bundle --minify --outfile=../../docs/index.js",
     "prettier-format": "prettier --write ."
   },
-  "author": "Your Name",
+  "author": "K372470",
   "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.0.15",
