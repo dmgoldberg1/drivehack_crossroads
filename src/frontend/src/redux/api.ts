@@ -49,9 +49,9 @@ export const sendLines = createAsyncThunk<
 });
 
 export const startWebsocket = () => (dispatch) => {
-  if (socket.connected) {
-    return;
-  }
+  // if (socket.connected) {
+  //   return;
+  // }
   socket.on("connect", () => {
     console.log("Socket ready");
   });
