@@ -1,10 +1,8 @@
-from PIL import Image, ImageDraw
 import cv2
-from yolov5 import YOLOv5
 from deep_sort_realtime.deepsort_tracker import DeepSort
+from PIL import Image, ImageDraw
 from utils import check_intersection
-
-
+from yolov5 import YOLOv5
 
 model = YOLOv5("yolov5s.pt")
 
@@ -18,9 +16,9 @@ draw = ImageDraw.Draw(trail_img)
 
 cap = cv2.VideoCapture(video_path)
 memory = dict()
-lines_array = [20, 20, 30, 720]#example
+lines_array = [20, 20, 30, 720]  # example
 count = 0
-draw.line((20, 20, 30, 720), fill='pink', width=5)#example
+draw.line((20, 20, 30, 720), fill="pink", width=5)  # example
 
 
 while cap.isOpened():
@@ -49,7 +47,7 @@ while cap.isOpened():
         if track_id not in memory.keys():
             memory[track_id] = bbox_center
         else:
-            #считаем коэффициенты прямой и обновляем последнюю точку
+            # считаем коэффициенты прямой и обновляем последнюю точку
             print(memory)
             x_old, y_old = memory[track_id][0], memory[track_id][1]
             if x_new == x_old:
@@ -58,20 +56,26 @@ while cap.isOpened():
                 k = (y_new - y_old) / (x_new - x_old)
                 b = y_old - k * x_old
                 if check_intersection(k, b, x_new, y_new, x_old, y_old, lines_array):
-                    count += 1#тут должен быть словарь с линиями какой-будь
+                    count += 1  # тут должен быть словарь с линиями какой-будь
 
                 memory[track_id] = bbox_center
                 print(memory)
 
-
         trail_img.putpixel(bbox_center, (255, 0, 0))
 
         cv2.rectangle(frame, (x, y), (x_, y_), (0, 255, 0), 2)
-        cv2.putText(frame, f"ID: {track_id}", (int(bbox[0]), int(bbox[1]) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9,
-                    (255, 255, 255), 2)
+        cv2.putText(
+            frame,
+            f"ID: {track_id}",
+            (int(bbox[0]), int(bbox[1]) - 10),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.9,
+            (255, 255, 255),
+            2,
+        )
 
-    cv2.imshow('Object Tracking', frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    cv2.imshow("Object Tracking", frame)
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 trail_img.show()
 print(count)

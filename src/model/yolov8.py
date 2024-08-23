@@ -1,13 +1,12 @@
-from PIL import Image, ImageDraw
 import cv2
-
 from deep_sort_realtime.deepsort_tracker import DeepSort
-from utils import check_intersection
+from PIL import Image, ImageDraw
 from ultralytics import YOLO
+from utils import check_intersection
 
 trail_img = Image.new(mode="RGB", size=(1280, 720))  # for debug
 draw = ImageDraw.Draw(trail_img)  # for debug
-draw.line((20, 20, 30, 720), fill='pink', width=5)  # for debug
+draw.line((20, 20, 30, 720), fill="pink", width=5)  # for debug
 
 
 class ObjectTracker:
@@ -60,7 +59,9 @@ class ObjectTracker:
                         for i in range(len(input_dict["lines"])):
                             lines_array = input_dict["lines"][i]["coord"]
                             line_name = input_dict["lines"][i]["name"]
-                            if check_intersection(k, b, x_new, y_new, x_old, y_old, lines_array):
+                            if check_intersection(
+                                k, b, x_new, y_new, x_old, y_old, lines_array
+                            ):
                                 if line_name not in self.lines_count_dict.keys():
                                     self.lines_count_dict[line_name] = 1
                                 else:
@@ -72,11 +73,18 @@ class ObjectTracker:
                 trail_img.putpixel(bbox_center, (255, 0, 0))
 
                 cv2.rectangle(frame, (x, y), (x_, y_), (0, 255, 0), 2)
-                cv2.putText(frame, f"ID: {track_id}", (int(bbox[0]), int(bbox[1]) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9,
-                            (255, 255, 255), 2)
+                cv2.putText(
+                    frame,
+                    f"ID: {track_id}",
+                    (int(bbox[0]), int(bbox[1]) - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.9,
+                    (255, 255, 255),
+                    2,
+                )
 
-            cv2.imshow('Object Tracking', frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            cv2.imshow("Object Tracking", frame)
+            if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
             # cap.release()
             # cv2.destroyAllWindows()
@@ -85,13 +93,7 @@ class ObjectTracker:
 
 tracker = ObjectTracker()
 example_dict = {
-    "lines": [
-        {
-            "name": "popaname",
-            "coord": [20, 20, 30, 720],
-            "direction": 1
-        }
-    ]
+    "lines": [{"name": "popaname", "coord": [20, 20, 30, 720], "direction": 1}]
 }
 
 print(tracker.process_video("test.mp4", example_dict))
