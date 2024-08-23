@@ -1,7 +1,7 @@
 export namespace DataTypes {
   export interface Line {
     points: [number, number, number, number];
-    name: string;
+    id: string;
   }
   export interface LineRequest {
     video_id: number;
@@ -15,7 +15,7 @@ export namespace DataTypes {
     video_id: number;
   }
   export interface LineResult {
-    name: string;
+    id: string;
     count: number;
   }
 }
