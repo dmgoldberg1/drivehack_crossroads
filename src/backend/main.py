@@ -10,6 +10,10 @@ import cv2
 from flask import Flask, Response, jsonify, render_template, request
 from flask_cors import CORS
 from flask_socketio import SocketIO
+from gevent import monkey
+from threading import Thread
+
+monkey.patch_all()
 
 module_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(module_dir))
@@ -79,16 +83,21 @@ def avatar_upload():
         )
 
 
-@socketio.on("lines")
-def lines_handler(raw_lines):
-    lines = json.loads(raw_lines)
-    video_id = lines["video_id"]
+def prep_video(video_id):
     logger.info("Video in processing")
     result = tracker_model.process_video(
         video_path=video_table[video_id], input_dict=lines
     )
     logger.info("Video processing completed")
     socketio.emit("lines_result", result)
+
+
+@socketio.on("lines")
+def lines_handler(raw_lines):
+    lines = json.loads(raw_lines)
+    video_id = lines["video_id"]
+    th = Thread(target=prep_video, args=(video_id,))
+    th.start()
 
 
 @socketio.on("connect")
