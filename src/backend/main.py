@@ -34,8 +34,14 @@ app.config["SECRET_KEY"] = "werty57i39fj92udifkdb56fwed232z"
 app.config["MAX_CONTENT_LENGTH"] = MAX_FILE_SIZE
 app.config["UPLOAD_FOLDER"] = os.path.join(BASE_DIR, "video")
 video_table = dict()
-socketio = SocketIO(app, cors_allowed_origins="*", logger=True, async_mode='gevent', async_handlers=True,
-                    ping_timeout=3600)
+socketio = SocketIO(
+    app,
+    cors_allowed_origins="*",
+    logger=True,
+    async_mode="gevent",
+    async_handlers=True,
+    ping_timeout=3600,
+)
 
 
 def get_first_frame(video_path):
@@ -90,7 +96,7 @@ def prep_video(video_id, lines):
         video_path=video_table[video_id], input_dict=lines
     )
     logger.info("Video processing completed")
-    socketio.emit("lines_result", result)
+    socketio.emit("lines-result", result)
     return None
 
 

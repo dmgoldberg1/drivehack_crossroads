@@ -58,7 +58,7 @@ class ObjectTracker:
                         b = y_old - k * x_old
                         for i in range(len(input_dict["lines"])):
                             lines_array = input_dict["lines"][i]["coord"]
-                            line_name = input_dict["lines"][i]["name"]
+                            line_name = input_dict["lines"][i]["id"]
                             if check_intersection(
                                 k, b, x_new, y_new, x_old, y_old, lines_array
                             ):
