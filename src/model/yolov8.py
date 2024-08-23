@@ -21,7 +21,7 @@ class ObjectTracker:
     def process_video(self, video_path, input_dict):
         cap = cv2.VideoCapture(video_path)
         self.input_dict = input_dict
-        self.lines_count_dict = {key: 0 for key in input_dict["lines"].keys()}
+        self.lines_count_dict = {obj["id"]: 0 for obj in input_dict["lines"]}
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
