@@ -90,7 +90,7 @@ class ObjectTracker:
 
 tracker = ObjectTracker()
 example_dict = {
-    "lines": [{"name": "popaname", "coord": [20, 20, 30, 720], "direction": 1}]
+    "lines": [{"id": "popaname", "coord": [20, 20, 30, 720], "direction": 1}]
 }
 if __name__ == "__main__":
     print(tracker.process_video("test.mp4", example_dict))
