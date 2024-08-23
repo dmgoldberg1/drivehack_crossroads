@@ -103,6 +103,8 @@ def lines_handler(raw_lines):
     th = Thread(target=prep_video, args=(video_id, lines))
     th.daemon = True
     th.start()
+    while th.is_alive():
+        socketio.sleep(1)
 
 
 @socketio.on("connect")
