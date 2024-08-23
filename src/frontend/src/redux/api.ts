@@ -49,6 +49,7 @@ export const sendLines = createAsyncThunk<
 });
 
 export const startWebsocket = () => (dispatch) => {
+  console.log("A");
   if (socket.connected) {
     return;
   }
