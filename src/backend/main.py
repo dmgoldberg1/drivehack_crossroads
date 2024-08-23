@@ -3,8 +3,9 @@ import json
 import logging
 import os.path
 import random
-from pathlib import Path
 import sys
+from pathlib import Path
+
 import cv2
 from flask import Flask, Response, jsonify, render_template, request
 from flask_cors import CORS
