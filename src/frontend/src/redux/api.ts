@@ -30,7 +30,6 @@ const socket = io(backendUrl, {
   extraHeaders: { "ngrok-skip-browser-warning": "69420" },
 });
 
-socket.connect();
 export const sendLines = createAsyncThunk<
   unknown,
   undefined,
@@ -50,9 +49,10 @@ export const sendLines = createAsyncThunk<
 });
 
 export const startWebsocket = () => (dispatch) => {
-  // if (socket.connected) {
-  //   return;
-  // }
+  console.log("A");
+  if (socket.connected) {
+    return;
+  }
   socket.on("connect", () => {
     console.log("Socket ready");
   });
