@@ -83,7 +83,7 @@ def avatar_upload():
         )
 
 
-def prep_video(video_id):
+def prep_video(video_id, lines):
     logger.info("Video in processing")
     result = tracker_model.process_video(
         video_path=video_table[video_id], input_dict=lines
@@ -96,7 +96,7 @@ def prep_video(video_id):
 def lines_handler(raw_lines):
     lines = json.loads(raw_lines)
     video_id = lines["video_id"]
-    th = Thread(target=prep_video, args=(video_id,))
+    th = Thread(target=prep_video, args=(video_id, lines))
     th.start()
 
 
