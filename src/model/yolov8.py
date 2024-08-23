@@ -5,9 +5,11 @@ from deep_sort_realtime.deepsort_tracker import DeepSort
 from utils import check_intersection
 from ultralytics import YOLO
 
-trail_img = Image.new(mode="RGB", size=(1280, 720))#for debug
-draw = ImageDraw.Draw(trail_img)#for debug
-draw.line((20, 20, 30, 720), fill='pink', width=5)#for debug
+trail_img = Image.new(mode="RGB", size=(1280, 720))  # for debug
+draw = ImageDraw.Draw(trail_img)  # for debug
+draw.line((20, 20, 30, 720), fill='pink', width=5)  # for debug
+
+
 class ObjectTracker:
     def __init__(self):
         self.model = YOLO("yolov8s.pt")
@@ -15,11 +17,10 @@ class ObjectTracker:
         self.deepsort = DeepSort(max_age=5)
         self.memory = dict()
         self.lines_count_dict = dict()
+
     def process_video(self, video_path, input_dict):
         cap = cv2.VideoCapture(video_path)
         self.input_dict = input_dict
-
-
 
         while cap.isOpened():
             ret, frame = cap.read()
@@ -48,8 +49,8 @@ class ObjectTracker:
                 if track_id not in self.memory.keys():
                     self.memory[track_id] = bbox_center
                 else:
-                    #считаем коэффициенты прямой и обновляем последнюю точку
-                    #print(memory)
+                    # считаем коэффициенты прямой и обновляем последнюю точку
+                    # print(memory)
                     x_old, y_old = self.memory[track_id][0], self.memory[track_id][1]
                     if x_new == x_old:
                         continue
@@ -66,8 +67,7 @@ class ObjectTracker:
                                     self.lines_count_dict[line_name] += 1
 
                         self.memory[track_id] = bbox_center
-                        #print(memory)
-
+                        # print(memory)
 
                 trail_img.putpixel(bbox_center, (255, 0, 0))
 
@@ -78,19 +78,20 @@ class ObjectTracker:
             cv2.imshow('Object Tracking', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-            #cap.release()
-            #cv2.destroyAllWindows()
+            # cap.release()
+            # cv2.destroyAllWindows()
         return self.lines_count_dict
+
 
 tracker = ObjectTracker()
 example_dict = {
- "lines": [
-    {
-    "name" : "popaname",
-    "coord": [20, 20, 30, 720],
-    "direction" : 1
-   }
- ]
+    "lines": [
+        {
+            "name": "popaname",
+            "coord": [20, 20, 30, 720],
+            "direction": 1
+        }
+    ]
 }
 
 print(tracker.process_video("test.mp4", example_dict))
