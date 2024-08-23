@@ -95,7 +95,7 @@ def prep_video(video_id, lines):
     result = tracker_model.process_video(
         video_path=video_table[video_id], input_dict=lines
     )
-    logger.info("Video processing completed")
+    logger.info(f"Video processing completed: {result}")
     socketio.emit("lines-result", result)
     return None
 
