@@ -83,9 +83,12 @@ def avatar_upload():
 def lines_handler(raw_lines):
     lines = json.loads(raw_lines)
     video_id = lines["video_id"]
-
-    tracker_model.process_video(video_path=video_table[video_id], input_dict=lines)
-    socketio.emit("lol", "popa")
+    logger.info("Video in processing")
+    result = tracker_model.process_video(
+        video_path=video_table[video_id], input_dict=lines
+    )
+    logger.info("Video processing completed")
+    socketio.emit("lines_result", result)
 
 
 @socketio.on("connect")
