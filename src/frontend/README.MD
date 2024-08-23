@@ -1,10 +1,10 @@
 ## Front End
 
-Создано с нуля на [React](https://react.dev/) Type Scipt с использованием технологии менеджера состояния приложения [Redux-Toolkit](https://redux-toolkit.js.org/)
+Создано с нуля на [React](https://react.dev/) Type Scipt с использованием технологии менеджера состояния приложения [Redux-Toolkit](https://redux-toolkit.js.org/) и `WebSocket`
 
 ### Демо
 
-Посмотреть работу вы можете здесь: [*Клик*](github.com)
+Посмотреть работу вы можете здесь: [*Клик*](https://dmgoldberg1.github.io/drivehack_crossroads/)
 
 ### Как скомпилить
 

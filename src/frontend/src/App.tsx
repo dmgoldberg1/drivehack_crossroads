@@ -1,27 +1,30 @@
 import React, { useEffect } from "react";
 import { ProgressPanel } from "./components/progress-panel/ProgressPanel";
 import { TopPanel } from "./components/TopPanel";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, redirect } from "react-router-dom";
 import { LineDrawerCanvas } from "./components/pages/line-drawer/LineDrawerCanvas";
 import { FileUploader } from "./components/pages/file-uploader/FileUploader";
-import { startListening } from "./redux/api";
+import { startWebsocket } from "./redux/api";
 import { useAppDispatch } from "./redux/rootStore";
+import { ResultPage } from "./components/pages/show-result/ResultPage";
 //TODO:beautify imports, make components/index
 
 export const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(startListening());
+    dispatch(startWebsocket());
   }, []);
+
   return (
     <>
       <TopPanel height="55px" />
       <ProgressPanel />
       <Routes>
-        <Route index path="/docs" element={<FileUploader />} />
+        <Route path="/docs" loader={() => redirect("/")} />
+        <Route index path="/" element={<FileUploader />} />
         <Route path="/edit" element={<LineDrawerCanvas />} />
-        <Route path="/result" element={<section>Other</section>} />
+        <Route path="/result" element={<ResultPage />} />
       </Routes>
     </>
   );

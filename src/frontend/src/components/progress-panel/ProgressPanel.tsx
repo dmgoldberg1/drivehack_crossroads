@@ -17,7 +17,7 @@ import { selectStepperState } from "../../redux/stepperStateSlice";
 export const ProgressPanel = () => {
   const activeStep = selectStepperState();
   return (
-    <Stepper m="10px" index={activeStep} colorScheme="red">
+    <Stepper m="10px" index={activeStep} colorScheme="teal">
       {Object.keys(steps).map((key, index) => (
         <Step key={index}>
           <StepIndicator>
