@@ -45,7 +45,7 @@ export const ResultChart = ({
 }) => {
   const chartData = formatData(inputData);
   return (
-    <Card style={{ margin:"10px",padding:'15px'}}>
+    <Card style={{ margin:"10px",padding:'15px'}} alignItems={'center'} maxWidth={'60%'}>
       <Bar options={options} data={chartData} />
     </Card>
   );

@@ -96752,7 +96752,7 @@ For more info see: https://github.com/konvajs/react-konva/issues/194
     inputData
   }) => {
     const chartData = formatData(inputData);
-    return /* @__PURE__ */ import_react96.default.createElement(Card, { style: { margin: "10px", padding: "15px" } }, /* @__PURE__ */ import_react96.default.createElement(Bar, { options, data: chartData }));
+    return /* @__PURE__ */ import_react96.default.createElement(Card, { style: { margin: "10px", padding: "15px" }, alignItems: "center", maxWidth: "60%" }, /* @__PURE__ */ import_react96.default.createElement(Bar, { options, data: chartData }));
   };
 
   // src/components/pages/show-result/ResultPage.tsx
@@ -96775,7 +96775,7 @@ For more info see: https://github.com/konvajs/react-konva/issues/194
 
   // src/components/theme.js
   var config2 = {
-    initialColorMode: "dark",
+    initialColorMode: "light",
     useSystemColorMode: false
   };
   var theme2 = extendTheme({ config: config2 });
