@@ -5,13 +5,13 @@ import os.path
 import random
 import sys
 from pathlib import Path
+from threading import Thread
 
 import cv2
 from flask import Flask, Response, jsonify, render_template, request
 from flask_cors import CORS
 from flask_socketio import SocketIO
 from gevent import monkey
-from threading import Thread
 
 monkey.patch_all()
 
@@ -97,6 +97,7 @@ def lines_handler(raw_lines):
     lines = json.loads(raw_lines)
     video_id = lines["video_id"]
     th = Thread(target=prep_video, args=(video_id, lines))
+    th.daemon = True
     th.start()
 
 
