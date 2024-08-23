@@ -11,7 +11,7 @@ draw.line((20, 20, 30, 720), fill="pink", width=5)  # for debug
 
 class ObjectTracker:
     def __init__(self):
-        self.model = YOLO("yolov8s.pt")
+        self.model = YOLO("yolov8n.pt")
         # Инициализация DeepSort
         self.deepsort = DeepSort(max_age=10)
         self.memory = dict()
@@ -86,8 +86,7 @@ class ObjectTracker:
             cv2.imshow("Object Tracking", frame)
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
-            # cap.release()
-            # cv2.destroyAllWindows()
+        cap.release()
         return self.lines_count_dict
 
 
@@ -95,5 +94,5 @@ tracker = ObjectTracker()
 example_dict = {
     "lines": [{"name": "popaname", "coord": [20, 20, 30, 720], "direction": 1}]
 }
-
-print(tracker.process_video("test.mp4", example_dict))
+if __name__ == "__main__":
+    print(tracker.process_video("test.mp4", example_dict))

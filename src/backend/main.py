@@ -21,7 +21,7 @@ logging.basicConfig(
     level=logging.DEBUG,
 )
 logger = logging.getLogger(__name__)
-
+tracker_model = ObjectTracker()
 app = Flask(__name__)
 cors = CORS(app)
 MAX_FILE_SIZE = 1024 * 1024 * 1024
@@ -29,7 +29,7 @@ BASE_DIR = str(Path(__file__).resolve().parent.parent.parent)
 app.config["SECRET_KEY"] = "werty57i39fj92udifkdb56fwed232z"
 app.config["MAX_CONTENT_LENGTH"] = MAX_FILE_SIZE
 app.config["UPLOAD_FOLDER"] = os.path.join(BASE_DIR, "video")
-
+video_table = dict()
 socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
 
 
@@ -62,6 +62,7 @@ def avatar_upload():
         file_sv.write(file_bytes)
         file_sv.close()
         preview, height, width = get_first_frame(file_path)
+        video_table[video_id] = file_path
         return jsonify(
             {
                 "success": True,
@@ -81,20 +82,10 @@ def avatar_upload():
 @socketio.on("lines")
 def lines_handler(raw_lines):
     lines = json.loads(raw_lines)
-    print(lines)
+    video_id = lines["video_id"]
+
+    tracker_model.process_video(video_path=video_table[video_id], lines=lines)
     socketio.emit("lol", "popa")
-
-
-def send_preview(video):
-    file = open(r"D:\Desktop\python_projects_2022\traffic-counter\road2.webp", "rb")
-    file_data = file.read()
-    file.close()
-    preview = {
-        "file": str(base64.b64encode(file_data))[2:-1],
-        "height": 720,
-        "width": 1280,
-    }
-    socketio.emit("preview", preview)
 
 
 @socketio.on("connect")
@@ -102,19 +93,9 @@ def test_connect(data):
     logger.info("connected by socket.io")
 
 
-@app.route("/aaa")
-def test_aa():
-    return "<p>Hello, World!</p>"
-
-
 @socketio.on("test")
-def test_popa(data):
+def test_socket(data):
     socketio.send(data)
-
-
-@socketio.on("video")
-def handle_video(data):
-    send_preview(data)
 
 
 if __name__ == "__main__":
