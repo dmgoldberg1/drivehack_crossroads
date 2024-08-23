@@ -12,7 +12,7 @@ draw.line((20, 20, 30, 720), fill="pink", width=5)  # for debug
 class ObjectTracker:
     def __init__(self):
         self.model = YOLO("yolov8n.pt")
-        self.model.to("CUDA")
+        self.model.to("cuda")
         # Инициализация DeepSort
         self.deepsort = DeepSort(max_age=10)
         self.memory = dict()
