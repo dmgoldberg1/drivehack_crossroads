@@ -89,7 +89,6 @@ def prep_video(video_id, lines):
         video_path=video_table[video_id], input_dict=lines
     )
     logger.info("Video processing completed")
-    socketio.emit("lines_result", result)
 
 
 th = None
@@ -105,6 +104,7 @@ def lines_handler(raw_lines):
     th.start()
     while th.is_alive():
         socketio.sleep(1)
+    socketio.emit("lines_result", th.join())
 
 
 @socketio.on("connect")
