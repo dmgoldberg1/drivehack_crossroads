@@ -34,7 +34,7 @@ app.config["SECRET_KEY"] = "werty57i39fj92udifkdb56fwed232z"
 app.config["MAX_CONTENT_LENGTH"] = MAX_FILE_SIZE
 app.config["UPLOAD_FOLDER"] = os.path.join(BASE_DIR, "video")
 video_table = dict()
-socketio = SocketIO(app, cors_allowed_origins="*", logger=True)
+socketio = SocketIO(app, cors_allowed_origins="*", logger=True, async_mode='gevent', async_handlers=True, )
 
 
 def get_first_frame(video_path):
@@ -92,8 +92,12 @@ def prep_video(video_id, lines):
     socketio.emit("lines_result", result)
 
 
+th = None
+
+
 @socketio.on("lines")
 def lines_handler(raw_lines):
+    global th
     lines = json.loads(raw_lines)
     video_id = lines["video_id"]
     th = Thread(target=prep_video, args=(video_id, lines))
