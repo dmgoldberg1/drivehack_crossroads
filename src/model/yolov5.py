@@ -60,18 +60,18 @@ while cap.isOpened():
                 memory[track_id] = bbox_center
                 print(memory)
 
-        trail_img.putpixel(bbox_center, (255, 0, 0))
-
-        cv2.rectangle(frame, (x, y), (x_, y_), (0, 255, 0), 2)
-        cv2.putText(
-            frame,
-            f"ID: {track_id}",
-            (int(bbox[0]), int(bbox[1]) - 10),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.9,
-            (255, 255, 255),
-            2,
-        )
+        # trail_img.putpixel(bbox_center, (255, 0, 0))
+        #
+        # cv2.rectangle(frame, (x, y), (x_, y_), (0, 255, 0), 2)
+        # cv2.putText(
+        #     frame,
+        #     f"ID: {track_id}",
+        #     (int(bbox[0]), int(bbox[1]) - 10),
+        #     cv2.FONT_HERSHEY_SIMPLEX,
+        #     0.9,
+        #     (255, 255, 255),
+        #     2,
+        # )
 
     # cv2.imshow("Object Tracking", frame)
     if cv2.waitKey(1) & 0xFF == ord("q"):
