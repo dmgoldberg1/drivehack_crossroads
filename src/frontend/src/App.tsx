@@ -21,8 +21,7 @@ export const App = () => {
       <TopPanel height="55px" />
       <ProgressPanel />
       <Routes>
-        <Route path="/docs" loader={() => redirect("/")} />
-        <Route index path="/" element={<FileUploader />} />
+        <Route index path="/drivehack_crossroads" element={<FileUploader />} />
         <Route path="/edit" element={<LineDrawerCanvas />} />
         <Route path="/result" element={<ResultPage />} />
       </Routes>
